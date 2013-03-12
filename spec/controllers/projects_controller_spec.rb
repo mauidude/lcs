@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe ProjectsController do
+  devise_mappings
+  login_user
+
   describe 'GET #new' do
     before :each do
       get :new

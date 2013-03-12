@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe ProjectTasksController do
+  devise_mappings
+  login_user
+
   let!(:project) { FactoryGirl.create :project }
 
   describe 'GET #new' do
