@@ -1,0 +1,20 @@
+.span3
+  .well.sidebar-nav
+    .nav.nav-list
+      li.nav-header Projects
+      -for project in @projects
+        li= link_to project.name, project
+      li= link_to new_project_path do
+        i.icon-plus-sign
+        |  New Project
+
+.span9
+  -if notice.present?
+    .alert.alert-success= notice
+  -if content_for?(:title)
+    .page-header
+      h1= content_for(:title)
+
+  =yield
+
+=parent_layout 'application'

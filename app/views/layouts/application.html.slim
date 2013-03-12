@@ -1,0 +1,42 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title= content_for?(:title) ? "#{content_for(:title)} | LCS" : "LCS"
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="robots" content="noindex,nofollow")
+    =stylesheet_link_tag 'application', media: :all
+
+    /[if lt IE 9]
+      script(src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
+
+    =csrf_meta_tags
+  body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          button.btn.btn-navbar(type="button" data-toggle="collapse" data-target=".nav-collapse")
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          =link_to 'LCS Construction', root_path, class: 'brand'
+          .nav-collapse.collapse
+            p.navbar-text.pull-right
+              -if user_signed_in?
+                ='"Signed in as #{current_user.name}"
+                ="(#{link_to 'Sign Out', destroy_user_session_path, method: :delete})".html_safe
+              -else
+                =link_to 'Sign In', new_user_session_path
+            =content_for(:menu)
+
+    .container-fluid
+      .row-fluid
+        =yield
+
+      hr
+
+      footer
+        p
+          | Created by Shane Andrade
+
+    =javascript_include_tag 'application'

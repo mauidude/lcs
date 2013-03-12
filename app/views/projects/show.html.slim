@@ -1,0 +1,39 @@
+-content_for(:title) do
+  =@project.name
+
+table.table.table-striped
+  thead
+    tr
+      th Week
+      th Task
+      th Cost Code
+      th Hours
+      th
+  tbody
+    -project_tasks = @project.tasks
+    -for project_task in project_tasks
+      tr
+        td= project_task.week
+        td= project_task.description
+        td= project_task.cost_code
+        td= project_task.hours
+        td= link_to 'Delete', project_task_path(@project, project_task), method: :delete, confirm: 'Are you sure you want to delete these hours?'
+
+    -unless project_tasks.present?
+      tr
+        td(colspan="5") No hours added
+  tfoot
+    tr
+      td Total:
+      td
+      td
+      td= @project.tasks.sum('hours')
+      td
+
+='link_to new_project_task_path(@project), class: 'btn btn-primary' do
+  i.icon-plus-sign
+  |  Add Hours
+
+=link_to project_path(@project, format: :xls), class: 'btn' do
+  i.icon-table
+  |  Export to Excel

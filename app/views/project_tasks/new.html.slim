@@ -1,0 +1,6 @@
+=simple_form_for(@project_task) do |f|
+  =f.input :week
+  =f.input :hours
+  =f.association :task, collection: Task.order('description ASC, cost_code ASC').map { |t| ["#{t.description} (#{t.cost_code})", t.id] }, prompt: 'Select task'
+
+  =f.submit class: 'btn btn-primary'

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Week</Data></Cell>
+        <Cell><Data ss:Type="String">Description</Data></Cell>
+        <Cell><Data ss:Type="String">Cost Code</Data></Cell>
+        <Cell><Data ss:Type="String">Hours</Data></Cell>
+      </Row>
+    <% @project.tasks.each do |task| %>
+      <Row>
+        <Cell><Data ss:Type="Date"><%= task.week %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= task.description %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= task.cost_code %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= task.hours %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
