@@ -1,5 +1,5 @@
 class ProjectsController < SecureController
-  before_filter :load_project, only: [:show, :edit, :update]
+  before_filter :load_project, only: [:show, :edit, :update, :year]
 
   def new
     @project = Project.new
@@ -34,6 +34,13 @@ class ProjectsController < SecureController
       redirect_to @project
     else
       render :edit
+    end
+  end
+
+  def year
+    respond_to do |format|
+      format.html
+      format.xls
     end
   end
 

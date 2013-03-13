@@ -4,6 +4,7 @@ Lcs::Application.routes.draw do
   root to: 'home#index'
 
   resources :projects do
+    match :year, on: :member
     resources :tasks, controller: :project_tasks
   end
 

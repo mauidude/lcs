@@ -1,0 +1,32 @@
+-content_for(:title) do
+  ="#{@project.name} By Year"
+
+=link_to "all hours", @project
+
+table.table.table-striped
+  thead
+    tr
+      th Year
+      th Hours
+  tbody
+    -project_tasks = @project.tasks.by_year
+    -for project_task in project_tasks
+      tr
+        td= project_task.year
+        td= number_with_precision(project_task.hours, precision: 2)
+
+    -unless project_tasks.present?
+      tr
+        td(colspan="2") No hours added
+  tfoot
+    tr
+      td Total:
+      td= number_with_precision(@project.tasks.sum('hours'), precision: 2)
+
+='link_to new_project_task_path(@project), class: 'btn btn-primary' do
+  i.icon-plus-sign
+  |  Add Hours
+
+=link_to year_project_path(@project, format: :xls), class: 'btn' do
+  i.icon-table
+  |  Export to Excel

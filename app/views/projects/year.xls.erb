@@ -7,16 +7,12 @@
   <Worksheet ss:Name="Sheet1">
     <Table>
       <Row>
-        <Cell><Data ss:Type="String">Week</Data></Cell>
-        <Cell><Data ss:Type="String">Description</Data></Cell>
-        <Cell><Data ss:Type="String">Cost Code</Data></Cell>
+        <Cell><Data ss:Type="String">Year</Data></Cell>
         <Cell><Data ss:Type="String">Hours</Data></Cell>
       </Row>
-    <% @project.tasks.each do |task| %>
+    <% @project.tasks.by_year.each do |task| %>
       <Row>
-        <Cell><Data ss:Type="Date"><%= task.week %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= task.description %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= task.cost_code %></Data></Cell>
+        <Cell><Data ss:Type="Date"><%= task.year %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= number_with_precision(task.hours, precision: 2) %></Data></Cell>
       </Row>
     <% end %>

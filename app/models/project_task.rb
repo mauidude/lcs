@@ -20,4 +20,8 @@ class ProjectTask < ActiveRecord::Base
 
   validates :task,
             presence: true
+
+  scope :by_year, group('date_part(\'year\', "week")')
+                  .select('sum("hours") as "hours", date_part(\'year\', "week") as "year", null as week')
+                  .order('"year" DESC')
 end

@@ -1,6 +1,8 @@
 -content_for(:title) do
   =@project.name
 
+=link_to "by year", year_project_path(@project)
+
 table.table.table-striped
   thead
     tr
@@ -16,7 +18,7 @@ table.table.table-striped
         td= project_task.week
         td= project_task.description
         td= project_task.cost_code
-        td= project_task.hours
+        td= number_with_precision(project_task.hours, precision: 2)
         td= link_to 'Delete', project_task_path(@project, project_task), method: :delete, confirm: 'Are you sure you want to delete these hours?'
 
     -unless project_tasks.present?
@@ -27,7 +29,7 @@ table.table.table-striped
       td Total:
       td
       td
-      td= @project.tasks.sum('hours')
+      td= number_with_precision(@project.tasks.sum('hours'), precision: 2)
       td
 
 ='link_to new_project_task_path(@project), class: 'btn btn-primary' do
